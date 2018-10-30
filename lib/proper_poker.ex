@@ -3,16 +3,7 @@ defmodule ProperPoker do
   Documentation for ProperPoker.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ProperPoker.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def vs(_left, _right) do
+    "Left wins!"
   end
 end
