@@ -5,7 +5,7 @@ defmodule ProperPoker.Pattern.FullHouseTest do
   alias ProperPoker.Pattern.FullHouse
 
   describe "check/1" do
-    test "returns FullHouse with score when there are 4 cards with the same value" do
+    test "returns FullHouse with score when there are 3 cards with the same value and 1 pair" do
       cards = [
         %Card{value: "9", suit: "D"},
         %Card{value: "9", suit: "C"},

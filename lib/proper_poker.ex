@@ -14,6 +14,6 @@ defmodule ProperPoker do
   end
 
   def format_result(:left), do: "Left wins!"
-  def format_result(:tie), do: "Tie!"
+  def format_result(:tie), do: "Tie."
   def format_result(:right), do: "Right wins!"
 end

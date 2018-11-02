@@ -3,7 +3,7 @@ defmodule ProperPoker.GameTest do
   alias ProperPoker.{Game, Card}
 
   describe "get_result/1" do
-    test "result result" do
+    test "return result when given left, right cards" do
       left = [
         %Card{value: "3", suit: "D"},
         %Card{value: "4", suit: "H"},

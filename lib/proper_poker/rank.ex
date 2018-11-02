@@ -1,10 +1,25 @@
 defmodule ProperPoker.Rank do
-  alias ProperPoker.Pattern.{StraightFlush, FourOfAKind, HighCard, FullHouse}
+  alias ProperPoker.Pattern.{
+    StraightFlush,
+    FourOfAKind,
+    FullHouse,
+    Flush,
+    Straight,
+    ThreeOfAKind,
+    TwoPairs,
+    Pair,
+    HighCard
+  }
 
   @rank_types [
     StraightFlush,
     FourOfAKind,
     FullHouse,
+    Flush,
+    Straight,
+    ThreeOfAKind,
+    TwoPairs,
+    Pair,
     HighCard
   ]
 
@@ -32,8 +47,6 @@ defmodule ProperPoker.Rank do
     with :tie <- compare_position(left_rank_position, right_rank_position),
          :tie <- compare_score(left_score, right_score) do
       :tie
-    else
-      result -> result
     end
   end
 
@@ -52,6 +65,19 @@ defmodule ProperPoker.Rank do
   defp compare_position(left_rank_position, right_rank_position)
        when left_rank_position == right_rank_position,
        do: :tie
+
+  defp compare_score([], []) do
+    :tie
+  end
+
+  defp compare_score(
+         [current_left_score | rest_left_scores],
+         [current_right_score | rest_right_scores]
+       ) do
+    with :tie <- compare_score(current_left_score, current_right_score) do
+      compare_score(rest_left_scores, rest_right_scores)
+    end
+  end
 
   defp compare_score(left_score, right_score) when left_score < right_score, do: :right
   defp compare_score(left_score, right_score) when left_score > right_score, do: :left

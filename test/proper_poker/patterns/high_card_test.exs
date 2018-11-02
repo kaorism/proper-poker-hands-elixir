@@ -14,7 +14,7 @@ defmodule ProperPoker.Pattern.HighCardTest do
         %Card{value: "4", suit: "H"}
       ]
 
-      assert HighCard.check(cards) == {:ok, HighCard, 11}
+      assert HighCard.check(cards) == {:ok, HighCard, [11, 9, 4, 3, 2]}
     end
   end
 end

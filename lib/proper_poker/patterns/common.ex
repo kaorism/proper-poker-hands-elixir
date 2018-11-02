@@ -1,16 +1,25 @@
 defmodule ProperPoker.Pattern.Common do
   alias ProperPoker.Card
 
+  def sort_score(cards) do
+    scores =
+      cards
+      |> Enum.map(&Card.get_card_score/1)
+      |> Enum.sort()
+      |> Enum.reverse()
+
+    {:ok, scores}
+  end
+
   def consecutive_values(cards) do
     {count, high_score} =
       cards
       |> Enum.map(&Card.get_card_score/1)
       |> Enum.sort()
       |> chunk_consecutive
-      |> Enum.map(fn consecutive_values ->
-        {Enum.count(consecutive_values), Enum.max(consecutive_values)}
-      end)
-      |> Enum.max_by(fn {count, high_score} -> count end)
+      |> adjust_wheel
+      |> Enum.map(&{Enum.count(&1), Enum.max(&1)})
+      |> Enum.max_by(fn {count, _high_score} -> count end)
 
     {:ok, count, high_score}
   end
@@ -43,6 +52,9 @@ defmodule ProperPoker.Pattern.Common do
       |> Enum.map(fn {score, cards} ->
         {score, Enum.count(cards)}
       end)
+      |> Enum.sort(fn {score1, _count1}, {score2, _count2} ->
+        score1 > score2
+      end)
       |> Enum.sort(fn {_score1, count1}, {_score2, count2} ->
         count1 >= count2
       end)
@@ -60,10 +72,6 @@ defmodule ProperPoker.Pattern.Common do
     end
   end
 
-  def pair(cards) do
-    cards
-  end
-
   defp chunk_consecutive(list, current_element \\ [], acc \\ [])
   defp chunk_consecutive([head | rest], [], []), do: chunk_consecutive(rest, [head], [])
 
@@ -75,4 +83,10 @@ defmodule ProperPoker.Pattern.Common do
     do: chunk_consecutive(rest, [head], acc ++ [Enum.reverse(current_element)])
 
   defp chunk_consecutive([], current_element, acc), do: acc ++ [Enum.reverse(current_element)]
+
+  defp adjust_wheel([[2, 3, 4, 5], [14]]) do
+    [[1, 2, 3, 4, 5]]
+  end
+
+  defp adjust_wheel(consecutive_cards), do: consecutive_cards
 end
