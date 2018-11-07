@@ -1,21 +1,12 @@
 # ProperPoker
+### Property-based testing for PokerHands kata in Elixir
 
-**TODO: Add description**
+#### Example source code for
 
-## Installation
+[Property-based testing article](https://medium.com/@theesit/property-based-testing-driven-development-c2f823bf62ea)
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `proper_poker` to your list of dependencies in `mix.exs`:
+#### Requirements
+[here](https://github.com/fredwu/kata-poker-hands-elixir/blob/master/REQUIREMENTS.md)
 
-```elixir
-def deps do
-  [
-    {:proper_poker, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/proper_poker](https://hexdocs.pm/proper_poker).
-
+#### Another PokerHands implementation from Fred Wu
+[here](https://github.com/fredwu/kata-poker-hands-elixir)
